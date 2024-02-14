@@ -1,87 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flores Rojas</title>
-<style>
-    body {
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f0f0f0;
-    }
-    .flor {
-        position: absolute;
-        animation: crecer 2s forwards;
-    }
-    .tallo {
-        width: 2px;
-        height: 60px;
-        background-color: green;
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-1px);
-    }
-    .petalo {
-        width: 30px;
-        height: 30px;
-        background-color: red;
-        border-radius: 50%;
-        position: absolute;
-        bottom: 60px;
-        left: 50%;
-        transform: translateX(-15px);
-    }
-    .petalo::before, .petalo::after {
-        content: "";
-        width: 30px;
-        height: 30px;
-        background-color: red;
-        border-radius: 50%;
-        position: absolute;
-    }
-    .petalo::before {
-        transform: translate(-15px, -10px) rotate(45deg);
-    }
-    .petalo::after {
-        transform: translate(-15px, -10px) rotate(-45deg);
-    }
-    @keyframes crecer {
-        0% {
-            transform: scale(0);
-            opacity: 0;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Para mi Toxica</title>
+    <style>
+        #btnOtraPagina {
+            display: none; /* Ocultar el botón al principio */
         }
-        100% {
-            transform: scale(1);
-            opacity: 1;
-        }
-    }
-</style>
+    </style>
 </head>
 <body>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const contenedor = document.body;
-        const cantidadFlores = 10;
-        
-        for (let i = 0; i < cantidadFlores; i++) {
-            const flor = document.createElement("div");
-            flor.className = "flor";
-            contenedor.appendChild(flor);
-            
-            const tallo = document.createElement("div");
-            tallo.className = "tallo";
-            flor.appendChild(tallo);
-            
-            const petalo = document.createElement("div");
-            petalo.className = "petalo";
-            flor.appendChild(petalo);
+    <div id="app">
+        <h1 className='font-sans font-bold text-gray-400 text-2xl'> 
+            Quieres pasar san Valentin Conmigo Cosita Pechocha? </h1>
+        <img id="image" src="https://www.google.es/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F651896114808861748%2F&psig=AOvVaw0UZn1W4rjQwn-ZaRPkCAI2&ust=1707966272288000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIi0x6rsqYQDFQAAAAAdAAAAABAD" alt="GIF">
+        <p id="textP">Vamos, respondeme cosita Pechocha!</p>
+        <button id="btnNo">No</button>
+        <button id="btnYes">Sí</button>
+        <button id="btnOtraPagina" onclick="window.location.href = 'foticos.html'">Pulsa para ver algo lindo</button>
+    </div>
+
+    <script>
+        // Lógica de la aplicación
+        var index = 0;
+        var textP = 'Vamos, respondeme!';
+        var image = 'https://i.pinimg.com/originals/f6/a5/f7/f6a5f7ddff1f05cbcc560256b9f98c2e.gif';
+
+        var options = ['Segura?', 'Segurisima?', 'Estas completamente segura?', 'Tienes a otro muchacho?', 'Ya no me quieres?', 'No hay vuelta atras', 'No hay devoluciones', 'No hay garantias', 'No hay reembolsos', 'No hay cambios', 'Se va a morir el marranito'];
+
+        function handleButtonNo() {
+            index = (index + 1) % options.length;
+            image = 'https://i.pinimg.com/originals/99/cf/86/99cf860a99daff075a50f195dbfa5d3f.gif';
+            textP = options[index];
+            updateUI();
         }
-    });
-</script>
+
+        function handleButtonYes() {
+            image = 'https://i.pinimg.com/originals/77/81/79/778179a6a9ebc7a191cd9d84489b48a6.gif';
+            textP = 'Gracias por aceptar, te amo mucho mi BEBE <3';
+            updateUI();
+            // Mostrar el botón después de hacer clic en "Sí"
+            document.getElementById('btnOtraPagina').style.display = 'inline-block';
+        }
+
+        function updateUI() {
+            document.getElementById('textP').textContent = textP;
+            document.getElementById('image').src = image;
+        }
+
+        // Asignar los manejadores de eventos a los botones
+        document.getElementById('btnNo').addEventListener('click', handleButtonNo);
+        document.getElementById('btnYes').addEventListener('click', handleButtonYes);
+    </script>
 </body>
 </html>
