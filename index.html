@@ -19,7 +19,7 @@
         border-radius: 50%;
         background-color: red;
         position: absolute;
-        display: none;
+        opacity: 0; /* Inicialmente invisible */
     }
     #mensaje {
         text-align: center;
@@ -57,7 +57,7 @@
                     tamaño += 1;
                     elemento.style.width = tamaño + "px";
                     elemento.style.height = tamaño + "px";
-                    elemento.style.opacity = (100 - tamaño) / 100;
+                    elemento.style.opacity = tamaño / 100; // Cambié la fórmula para hacerla visible gradualmente
                 }
             }, 50);
         }
