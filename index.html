@@ -14,24 +14,57 @@
         background-color: #f0f0f0;
     }
     .flor {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: red;
         position: absolute;
-        opacity: 0; /* Inicialmente invisible */
+        animation: crecer 2s forwards;
     }
-    #mensaje {
-        text-align: center;
-        font-size: 24px;
+    .tallo {
+        width: 2px;
+        height: 60px;
+        background-color: green;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-1px);
+    }
+    .petalo {
+        width: 30px;
+        height: 30px;
+        background-color: red;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-15px);
+    }
+    .petalo::before, .petalo::after {
+        content: "";
+        width: 30px;
+        height: 30px;
+        background-color: red;
+        border-radius: 50%;
+        position: absolute;
+    }
+    .petalo::before {
+        transform: translate(-15px, -10px) rotate(45deg);
+    }
+    .petalo::after {
+        transform: translate(-15px, -10px) rotate(-45deg);
+    }
+    @keyframes crecer {
+        0% {
+            transform: scale(0);
+            opacity: 0;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
     }
 </style>
 </head>
 <body>
-<div id="mensaje">¡Bienvenido! Haz clic en "Aceptar" para ver las flores.</div>
 <script>
-    document.querySelector("#mensaje").addEventListener("click", function() {
-        this.style.display = "none";
+    document.addEventListener("DOMContentLoaded", function() {
         const contenedor = document.body;
         const cantidadFlores = 10;
         
@@ -40,26 +73,13 @@
             flor.className = "flor";
             contenedor.appendChild(flor);
             
-            const posicionInicialX = Math.random() * window.innerWidth;
-            const posicionInicialY = Math.random() * window.innerHeight;
-            flor.style.left = posicionInicialX + "px";
-            flor.style.top = posicionInicialY + "px";
+            const tallo = document.createElement("div");
+            tallo.className = "tallo";
+            flor.appendChild(tallo);
             
-            animarCrecimiento(flor);
-        }
-        
-        function animarCrecimiento(elemento) {
-            let tamaño = 10;
-            const intervalo = setInterval(() => {
-                if (tamaño >= 100) {
-                    clearInterval(intervalo);
-                } else {
-                    tamaño += 1;
-                    elemento.style.width = tamaño + "px";
-                    elemento.style.height = tamaño + "px";
-                    elemento.style.opacity = tamaño / 100; // Cambié la fórmula para hacerla visible gradualmente
-                }
-            }, 50);
+            const petalo = document.createElement("div");
+            petalo.className = "petalo";
+            flor.appendChild(petalo);
         }
     });
 </script>
